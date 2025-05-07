@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define SIZE 100
+
+typedef struct {
+    int items[SIZE];
+    int front, rear;
+} Queue;
+
+void initQueue(Queue *q) {
+    q->front = -1;
+    q->rear = -1;
+}
+
+int isEmpty(Queue *q) {
+    return q->front == -1 || q->front > q->rear;
+}
+
+int dequeue(Queue *q) {
+    if (isEmpty(q)) {
+        printf("Queue Underflow\n");
+        return -1;
+    }
+    return q->items[q->front++];
+}
+
+int main() {
+    Queue q;
+    initQueue(&q);
+    q.items[++q.rear] = 10;
+    q.items[++q.rear] = 20;
+    q.items[++q.rear] = 30;
+    q.front = 0;
+    printf("Deleted: %d\n", dequeue(&q));
+    printf("Deleted: %d\n", dequeue(&q));
+    return 0;
+}
